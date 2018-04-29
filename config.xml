@@ -3,7 +3,7 @@
     <name>StillTasty</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.1.25:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -85,8 +85,8 @@
     <allow-navigation href="http://192.168.202.64:8100" />
     <allow-navigation href="http://169.254.74.123:8100" />
     <allow-navigation href="http://192.168.1.58:8100" />
+    <engine name="android" spec="6.3.0" />
+    <engine name="ios" spec="~4.5.4" />
     <allow-navigation href="http://192.168.1.25:8100" />
     <plugin name="com.mirasense.scanditsdk.plugin" spec="/Users/Diutzky/Documents/Robi/StillTasty/scandit-barcodescanner-phonegap-ios_5.7.2" />
-    <engine name="ios" spec="4.5.4" />
-    <engine name="android" spec="6.3.0" />
 </widget>
