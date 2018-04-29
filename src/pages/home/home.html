@@ -1,0 +1,113 @@
+<ion-header>
+  <!-- NAVBAR - TITLE + ADD -->
+  <ion-navbar>
+    <ion-title>
+      StillTasty
+    </ion-title>
+
+    <ion-buttons end>
+      <button navPush="AddProductPage" ion-button>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <!-- end navbar -->
+
+  <!-- TABS INVENTORY -->
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="type">
+      <ion-segment-button value="fridge">
+        Fridge
+      </ion-segment-button>
+      <ion-segment-button value="freezer">
+        Freezer
+      </ion-segment-button>
+      <ion-segment-button value="pantry">
+        Pantry
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <!-- end tabs inventory -->
+</ion-header>
+
+<ion-content padding>
+  <div [ngSwitch]="type">
+      <ion-list *ngSwitchCase="'fridge'">
+          <ion-item *ngFor="let product of productList | async" 
+          detail-push navPush="EditProductPage" [navParams]="{product:product}">
+              <ion-card>
+                <ion-card-content>
+                  <div col-10 class="item__info">
+                    <p class="item__info__name">{{product.title}}</p>
+                    <!--<p class="item__info__details"></p>-->
+                  </div>
+                  <div col-2 class="item__image">
+                    <img src="../../assets/imgs/aubergine.svg" alt="">
+                  </div>
+                </ion-card-content>
+              </ion-card>
+          </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'freezer'" isActive>
+          <ion-item *ngFor="let product of productList | async" 
+          detail-push navPush="EditProductPage" [navParams]="{product:product}">
+              <ion-card>
+                <ion-card-content>
+                  <div col-10 class="item__info">
+                    <p class="item__info__name">{{product.title}}</p>
+                    <!--<p class="item__info__details"></p>-->
+                  </div>
+                  <div col-2 class="item__image">
+                    <img src="../../assets/imgs/aubergine.svg" alt="">
+                  </div>
+                </ion-card-content>
+              </ion-card>
+          </ion-item>
+      </ion-list>
+  
+      <ion-list *ngSwitchCase="'pantry'">
+          <ion-item *ngFor="let product of productList | async" 
+          detail-push navPush="EditProductPage" [navParams]="{product:product}">
+              <ion-card>
+                <ion-card-content>
+                  <div col-10 class="item__info">
+                    <p class="item__info__name">{{product.title}}</p>
+                    <!--<p class="item__info__details"></p>-->
+                  </div>
+                  <div col-2 class="item__image">
+                    <img src="../../assets/imgs/aubergine.svg" alt="">
+                  </div>
+                </ion-card-content>
+              </ion-card>
+          </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- CIRCLE BUTTONS -->
+    <ion-fab bottom center>
+        <button color="secondary" ion-fab>
+          <span class="button-inner">
+            <ion-icon name="menu"></ion-icon>
+          </span>
+          <div class="button-effect"></div>
+        </button>
+
+        <ion-fab-list side="top">
+          <button ion-fab navPush="ScanProductPage">
+            <ion-icon name="qr-scanner"></ion-icon>
+          </button>
+        </ion-fab-list>
+        <ion-fab-list side="left">
+          <button ion-fab>
+            <ion-icon name="stats"></ion-icon>
+          </button>
+        </ion-fab-list>
+        <ion-fab-list side="right">
+          <button ion-fab>
+            <ion-icon name="list"></ion-icon>
+          </button>
+        </ion-fab-list>
+    </ion-fab>
+    <!-- end circle buttons -->
+</ion-content>
