@@ -24,6 +24,10 @@ export class ListPage {
     var month;
     var day;
     for (let index = 0; index < this.listBarcodes.length; index++) {
+      if(this.listBarcodes[index].substr(0, 2) == "01") {
+        var product = this.listBarcodes[index].substr(2, 14);
+        this.listBarcodesParsed.push(product);
+      }
       this.date = this.listBarcodes[index].split('15');
       year = this.date[1].substr(0, 2);
       month = this.date[1].substr(2, 2);
