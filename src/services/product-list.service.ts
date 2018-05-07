@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Product } from '../model/product/product.model';
 import { Products } from '../model/product/products.model';
+import { ShoppingList } from '../model/product/shoppingList.model';
 
 @Injectable()
 export class ProductListService {
 
     private productListRef = this.db.list<Product>('products-list');
     private productRef = this.db.list<Products>('products');
+    private shoppingListRef = this.db.list<ShoppingList>('shopping-list');
 
     constructor(private db: AngularFireDatabase) { }
 
@@ -29,6 +31,10 @@ export class ProductListService {
 
     getProducts() {
         return this.productRef;
+    }
+
+    getShoppingList() {
+        return this.shoppingListRef;
     }
 
 }

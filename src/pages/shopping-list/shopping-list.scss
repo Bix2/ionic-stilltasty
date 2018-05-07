@@ -1,0 +1,17 @@
+page-shopping-list {
+    .item__info {
+        display: inline-block;
+    }
+
+    .item__image {
+        display: inline-block;
+    }
+
+    .item__image img {
+        width: 25px;
+    }
+
+    .item__info__name {
+        font-weight: bold;
+    }
+}

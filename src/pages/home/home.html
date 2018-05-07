@@ -37,7 +37,7 @@ detail-push navPush="EditProductPage"
   <div [ngSwitch]="type">
       <ion-list *ngSwitchCase="'fridge'">
           <ion-item *ngFor="let product of productList | async" 
-          (click)="presentActionSheet()">
+          (click)="presentActionSheet(product.key, product.title, product.content)">
               <ion-card>
                 <ion-card-content>
                   <div col-10 class="item__info">
@@ -107,7 +107,7 @@ detail-push navPush="EditProductPage"
           </button>
         </ion-fab-list>
         <ion-fab-list side="right">
-          <button ion-fab>
+          <button ion-fab navPush="ShoppingListPage">
             <ion-icon name="list"></ion-icon>
           </button>
         </ion-fab-list>

@@ -19,11 +19,18 @@ import { ProductListService } from '../../services/product-list.service';
 })
 export class ListPage {
 
-  public listBarcodesParsed;
+  public listBarcodesParsed = Array();
   public listBarcodes: any;
   public date: string;
   public productList: any;
   public data;
+
+  public pro: Product = {
+    title: '',
+    content: ''
+  };
+
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private productListService: ProductListService) {
 
@@ -38,9 +45,7 @@ export class ListPage {
       .subscribe(data => {
         this.data = data;
       });
-
-
-
+      
     this.listBarcodes = navParams.get('data');
     var year;
     var month;
@@ -55,16 +60,24 @@ export class ListPage {
       month = this.date[1].substr(2, 2);
       day = this.date[1].substr(4, 2);
       
-      this.listBarcodesParsed = [{
+      var productObject = {
         product: product,
         date: day + "-" + month + "-" + year
-      }];
+      }
+
+      this.listBarcodesParsed.push(productObject);
     }
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListPage');
+  }
+
+  addProduct(title, content) {
+      this.pro.title = title,
+      this.pro.content = content
+      this.productListService.addProduct(this.pro);
   }
 
 }

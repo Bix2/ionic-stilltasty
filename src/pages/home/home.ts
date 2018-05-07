@@ -8,6 +8,7 @@ import { Product } from '../../model/product/product.model';
 import { Products } from '../../model/product/products.model';
 import { ProductListService } from '../../services/product-list.service';
 import { EditProductPage } from '../edit-product/edit-product';
+import { ShoppingListPage } from '../shopping-list/shopping-list';
 
 
 @IonicPage()
@@ -18,7 +19,12 @@ import { EditProductPage } from '../edit-product/edit-product';
 export class HomePage {
 
   type: string = "fridge";
-  productList: Observable<Product[]>;
+  productList: Observable<Product[]>; 
+
+  public pro: Product = {
+    title: '',
+    content: ''
+  };
 
   constructor(
     public navCtrl: NavController, 
@@ -36,7 +42,7 @@ export class HomePage {
         });
     }
 
-  presentActionSheet() {
+  presentActionSheet(key, title, content) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'What have you just done to that delicious food?',
       buttons: [
@@ -49,13 +55,18 @@ export class HomePage {
         },{
           text: 'I ate it',
           handler: () => {
-            console.log('Archive clicked');
+            this.pro.key = key;
+            this.pro.title = title;
+            this.pro.content = content;
           }
         },{
           text: 'Edit it',
           handler: () => {
+            this.pro.key = key;
+            this.pro.title = title;
+            this.pro.content = content;
             this.navCtrl.push(EditProductPage, {
-              product: this.product
+              product: this.pro
             });
           }
         },{

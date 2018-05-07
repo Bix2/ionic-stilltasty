@@ -8,6 +8,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { MyApp } from './app.component';
 import { ListPage } from '../pages/list/list';
+import { EditProductPage } from '../pages/edit-product/edit-product';
 
 import { FIREBASE_CONFIG } from './firebase.credentials';
 import { ProductListService } from '../services/product-list.service';
@@ -17,7 +18,8 @@ import { ScannerServiceProvider } from '../providers/scanner-service/scanner-ser
 @NgModule({
   declarations: [
     MyApp,
-    ListPage
+    ListPage,
+    EditProductPage
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { ScannerServiceProvider } from '../providers/scanner-service/scanner-ser
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ListPage
+    ListPage,
+    EditProductPage
   ],
   providers: [
     StatusBar,

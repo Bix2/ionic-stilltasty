@@ -32,18 +32,23 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let product of listBarcodesParsed">
-      <ion-card>
-        <ion-card-content>
-          <div col-10 class="item__info">
-            <p class="item__info__name">{{product.product}}</p>
-            <p class="item__info__name">{{product.date}}</p>
-          </div>
-          <div col-2 class="item__image">
-            <img src="../../assets/imgs/aubergine.svg" alt="">
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </ion-item>
+    <div *ngFor="let product of listBarcodesParsed">
+      <ng-container *ngFor="let d of data">
+        <ion-item *ngIf="d.key == product.product">
+            <ion-card>
+              <ion-card-content>
+                <div col-10 class="item__info">
+                  <p class="item__info__name">{{d.name}}</p>
+                  <p class="item__info__name">{{product.date}}</p>
+                </div>
+                <div col-2 class="item__image">
+                  <img src="../../assets/imgs/aubergine.svg" alt="">
+                </div>
+              </ion-card-content>
+            </ion-card>
+            <button ion-button block clear (click)="addProduct(d.name, product.date)">Add</button>
+        </ion-item>
+      </ng-container>
+    </div>
   </ion-list>
 </ion-content>
