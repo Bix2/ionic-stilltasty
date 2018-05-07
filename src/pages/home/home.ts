@@ -4,11 +4,10 @@ import { ActionSheetController, NavParams} from 'ionic-angular';
 
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 import { Observable } from 'rxjs/Observable';
-import { Product } from '../../model/product/product.model';
-import { Products } from '../../model/product/products.model';
+import { userProducts } from '../../model/product/userProducts.model';
 import { ProductListService } from '../../services/product-list.service';
 import { EditProductPage } from '../edit-product/edit-product';
-import { ShoppingListPage } from '../shopping-list/shopping-list';
+import { ShoppingList } from '../../model/product/shoppingList.model';
 
 
 @IonicPage()
@@ -19,11 +18,16 @@ import { ShoppingListPage } from '../shopping-list/shopping-list';
 export class HomePage {
 
   type: string = "fridge";
-  productList: Observable<Product[]>; 
-
-  public pro: Product = {
+  productList: Observable<userProducts[]>; 
+  // Prepare 
+  userListProducts: userProducts = {
     title: '',
+    image: '',
     content: ''
+  };
+  shoppingListProduct: ShoppingList = {
+    image: '',
+    name: ''
   };
 
   constructor(
@@ -42,7 +46,7 @@ export class HomePage {
         });
     }
 
-  presentActionSheet(key, title, content) {
+  presentActionSheet(key, title, image, content) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'What have you just done to that delicious food?',
       buttons: [
@@ -50,23 +54,34 @@ export class HomePage {
           text: 'I wasted it',
           role: 'destructive',
           handler: () => {
-            console.log('Destructive clicked');
+            this.userListProducts.key = key;
+            this.userListProducts.title = title;
+            this.userListProducts.content = content;
+            this.shoppingListProduct.name = title;
+            this.shoppingListProduct.image = image;
+            this.productListService.addProductToShoppingList(this.shoppingListProduct);
+            this.productListService.removeProduct(this.userListProducts);
           }
         },{
           text: 'I ate it',
           handler: () => {
-            this.pro.key = key;
-            this.pro.title = title;
-            this.pro.content = content;
+            this.userListProducts.key = key;
+            this.userListProducts.title = title;
+            this.userListProducts.content = content;
+            this.shoppingListProduct.name = title;
+            this.shoppingListProduct.image = image;
+            this.productListService.addProductToShoppingList(this.shoppingListProduct);
+            this.productListService.removeProduct(this.userListProducts);
           }
         },{
           text: 'Edit it',
           handler: () => {
-            this.pro.key = key;
-            this.pro.title = title;
-            this.pro.content = content;
+            this.userListProducts.key = key;
+            this.userListProducts.title = title;
+            this.userListProducts.image = image;
+            this.userListProducts.content = content;
             this.navCtrl.push(EditProductPage, {
-              product: this.pro
+              product: this.userListProducts
             });
           }
         },{

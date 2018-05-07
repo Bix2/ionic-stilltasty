@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Product } from '../../model/product/product.model';
+import { userProducts } from '../../model/product/userProducts.model';
 import { ProductListService } from '../../services/product-list.service';
 
 @IonicPage()
@@ -10,8 +10,9 @@ import { ProductListService } from '../../services/product-list.service';
 })
 export class AddProductPage {
 
-  product: Product = {
+  product: userProducts = {
     title: '',
+    image: '',
     content: ''
   };
 
@@ -25,7 +26,7 @@ export class AddProductPage {
     console.log('ionViewDidLoad AddProductPage');
   }
 
-  addProduct(product: Product) {
+  addProduct(product: userProducts) {
     this.productListService.addProduct(product).then(ref => {
       this.navCtrl.setRoot('HomePage');
     })

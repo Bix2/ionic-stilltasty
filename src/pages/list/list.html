@@ -42,11 +42,11 @@
                   <p class="item__info__name">{{product.date}}</p>
                 </div>
                 <div col-2 class="item__image">
-                  <img src="../../assets/imgs/aubergine.svg" alt="">
+                  <img src="{{d.image}}" alt="">
                 </div>
               </ion-card-content>
             </ion-card>
-            <button ion-button block clear (click)="addProduct(d.name, product.date)">Add</button>
+            <button ion-button block clear (click)="addProduct(d.name, d.image, product.date)">Add</button>
         </ion-item>
       </ng-container>
     </div>

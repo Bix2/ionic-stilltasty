@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
-import { Product } from '../../model/product/product.model';
-import { Products } from '../../model/product/products.model';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+
+import { userProducts } from '../../model/product/userProducts.model';
 import { ProductListService } from '../../services/product-list.service';
 
 /**
@@ -25,16 +24,17 @@ export class ListPage {
   public productList: any;
   public data;
 
-  public pro: Product = {
+  public pro: userProducts = {
     title: '',
+    image: '',
     content: ''
   };
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private productListService: ProductListService) {
+  constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, private productListService: ProductListService) {
 
-    this.productList = this.productListService.getProducts()
+    this.productList = this.productListService.getUserProducts()
       .snapshotChanges()
       .map(
       changes => {
@@ -74,10 +74,23 @@ export class ListPage {
     console.log('ionViewDidLoad ListPage');
   }
 
-  addProduct(title, content) {
+  addProduct(title, image, content) {
       this.pro.title = title,
+      this.pro.image = image,
       this.pro.content = content
       this.productListService.addProduct(this.pro);
+      this.showToast("bottom");
+  }
+
+  showToast(position: string) {
+    const toast = this.toastCtrl.create({
+      message: 'Product has been added',
+      position: position,
+      showCloseButton: true,
+      duration: 2000
+    });
+
+    toast.present();
   }
 
 }

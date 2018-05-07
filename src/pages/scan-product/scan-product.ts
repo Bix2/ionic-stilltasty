@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Content, IonicPage, NavController, NavParams, Navbar } from 'ionic-angular';
+import { Content, IonicPage, NavController, NavParams, Navbar, ToastController } from 'ionic-angular';
 
 import { ScannerServiceProvider } from '../../providers/scanner-service/scanner-service';
 import { ListPage } from '../list/list';
@@ -28,6 +28,7 @@ export class ScanProductPage implements ScannerDelegate {
     public navCtrl: NavController,
     public navParams: NavParams,
     public scanner: ScannerServiceProvider,
+    private toastCtrl: ToastController
     ) {
   }
 
@@ -54,11 +55,10 @@ export class ScanProductPage implements ScannerDelegate {
   }
 
   public didScan(session: ScanSession) {
-    //if (!this.continuousMode) {
-    //  session.pauseScanning();
-    //}
+    session.pauseScanning();
     this.barcodes = session.newlyRecognizedCodes;
     this.addToList(session.newlyRecognizedCodes[0].data);
+    this.showToast("bottom");
   }
 
   public resumeScanning() {
@@ -69,6 +69,20 @@ export class ScanProductPage implements ScannerDelegate {
   public toggleContinuousMode() {
     this.continuousMode = !this.continuousMode;
     this.scanner.resume();
+  }
+
+
+  showToast(position: string) {
+    const toast = this.toastCtrl.create({
+      message: 'Successfully scanned',
+      position: position,
+      showCloseButton: true,
+      duration: 2000
+    });
+    toast.onDidDismiss(() => {
+      this.scanner.resume();
+    });
+    toast.present();
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Product } from '../../model/product/product.model';
+import { userProducts } from '../../model/product/userProducts.model';
 import { ProductListService } from '../../services/product-list.service';
 
 @IonicPage()
@@ -10,8 +10,9 @@ import { ProductListService } from '../../services/product-list.service';
 })
 export class EditProductPage {
 
-  product: Product = {
+  product: userProducts = {
     title: '',
+    image: '',
     content: ''
   };
 
@@ -25,13 +26,13 @@ export class EditProductPage {
     this.product = this.navParams.get('product');
   }
 
-  updateProduct(product: Product) {
+  updateProduct(product: userProducts) {
     this.productListService.updateProduct(product).then(() => {
       this.navCtrl.setRoot('HomePage');
     })
   }
 
-  removeProduct(product: Product) {
+  removeProduct(product: userProducts) {
     this.productListService.removeProduct(product).then(() => {
       this.navCtrl.setRoot('HomePage');
     })
