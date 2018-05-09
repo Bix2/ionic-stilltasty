@@ -23,7 +23,6 @@ export class ListPage {
   public date: string;
   public productList: any;
   public data;
-  
   public pro: userProducts = {
     title: '',
     image: '',
@@ -34,7 +33,7 @@ export class ListPage {
 
   constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, private productListService: ProductListService) {
 
-    this.productList = this.productListService.getUserProducts()
+    this.productList = this.productListService.getProducts()
       .snapshotChanges()
       .map(
       changes => {
@@ -74,11 +73,18 @@ export class ListPage {
     console.log('ionViewDidLoad ListPage');
   }
 
-  addProduct(title, image, content) {
+  addProduct(storage, title, image, content) {
     this.pro.title = title,
     this.pro.image = image,
     this.pro.content = content
-    this.productListService.addProduct(this.pro);
+    // Add product to the right location based on the storage type
+    if(storage == "fridge") {
+      this.productListService.addFridgeProduct(this.pro);
+    } else if(storage == "freezer") {
+      this.productListService.addFreezerProduct(this.pro);
+    } else if(storage == "pantry") {
+      this.productListService.addPantryProduct(this.pro);
+    }
     this.showToast("bottom");
   }
 

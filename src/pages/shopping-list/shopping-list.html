@@ -15,17 +15,23 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-item *ngFor="let product of shoppingList | async">
-            <ion-card>
-              <ion-card-content>
-                <div col-10 class="item__info">
-                  <p class="item__info__details">{{product.name}}</p>
-                </div>
-                <div col-2 class="item__image">
-                  <img src="{{product.image}}" alt="">
-                </div>
-              </ion-card-content>
-            </ion-card>
+      <ng-container *ngFor="let product of shoppingList | async">
+        <ion-item class="item__container">
+          <div col-2 class="item__image">
+            <img src="{{product.image}}" alt="">
+          </div>
+          <div col-8 class="item__info">
+            <ion-item>
+              <p class="item__info__details">{{product.name}}</p>
+            </ion-item>
+          </div>
+          <div col-2 class="item__checkbox">
+            <ion-item>
+              <ion-checkbox color="danger"></ion-checkbox>
+            </ion-item>
+          </div>
         </ion-item>
+      </ng-container>
     </ion-list>
+    <button full ion-button (click)="removeAllItems(shoppingList)">Remove all</button>
 </ion-content>

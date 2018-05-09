@@ -18,7 +18,9 @@ import { ShoppingList } from '../../model/product/shoppingList.model';
 export class HomePage {
 
   type: string = "fridge";
-  productList: Observable<userProducts[]>; 
+  fridgeProductList: Observable<userProducts[]>; 
+  freezerProductList: Observable<userProducts[]>; 
+  pantryProductList: Observable<userProducts[]>; 
   // Prepare 
   userListProducts: userProducts = {
     title: '',
@@ -36,7 +38,28 @@ export class HomePage {
     public actionSheetCtrl: ActionSheetController, 
     public product: NavParams,
     private productListService: ProductListService) {
-      this.productList = this.productListService.getProductList()
+      // get items in the fridge
+      this.fridgeProductList = this.productListService.getFridgeProductList()
+        .snapshotChanges()
+        .map(
+        changes => {
+          return changes.map(c => ({
+            key: c.payload.key, ...c.payload.val()
+          }))
+        });
+
+      // get items in de freezer
+      this.freezerProductList = this.productListService.getFreezerProductList()
+        .snapshotChanges()
+        .map(
+        changes => {
+          return changes.map(c => ({
+            key: c.payload.key, ...c.payload.val()
+          }))
+        });
+
+      // get items in de pantry
+      this.pantryProductList = this.productListService.getPantryProductList()
         .snapshotChanges()
         .map(
         changes => {
@@ -46,7 +69,7 @@ export class HomePage {
         });
     }
 
-  presentActionSheet(key, title, image, content) {
+  presentActionSheet(type, key, title, image, content) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'What have you just done to that delicious food?',
       buttons: [
@@ -60,7 +83,14 @@ export class HomePage {
             this.shoppingListProduct.name = title;
             this.shoppingListProduct.image = image;
             this.productListService.addProductToShoppingList(this.shoppingListProduct);
-            this.productListService.removeProduct(this.userListProducts);
+            // check location and remove item
+            if (type == "fridge") {
+              this.productListService.removeFridgeProduct(this.userListProducts);
+            } else if (type == "freezer") {
+              this.productListService.removeFreezerProduct(this.userListProducts);
+            } else if (type == "pantry") {
+              this.productListService.removePantryProduct(this.userListProducts);
+            }
           }
         },{
           text: 'I ate it',
@@ -71,7 +101,14 @@ export class HomePage {
             this.shoppingListProduct.name = title;
             this.shoppingListProduct.image = image;
             this.productListService.addProductToShoppingList(this.shoppingListProduct);
-            this.productListService.removeProduct(this.userListProducts);
+            // check location and remove item
+            if (type == "fridge") {
+              this.productListService.removeFridgeProduct(this.userListProducts);
+            } else if (type == "freezer") {
+              this.productListService.removeFreezerProduct(this.userListProducts);
+            } else if (type == "pantry") {
+              this.productListService.removePantryProduct(this.userListProducts);
+            }
           }
         },{
           text: 'Edit it',
@@ -81,7 +118,8 @@ export class HomePage {
             this.userListProducts.image = image;
             this.userListProducts.content = content;
             this.navCtrl.push(EditProductPage, {
-              product: this.userListProducts
+              product: this.userListProducts,
+              type: type
             });
           }
         },{

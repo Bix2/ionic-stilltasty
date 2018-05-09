@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Scan Product</ion-title>
+    <ion-title>Add product to {{type}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -21,7 +21,7 @@
 
   <ion-item>
     <ion-label>Date</ion-label>
-    <ion-textarea [(ngModel)]="product.content" placeholder="Product date"></ion-textarea>
+    <ion-input [(ngModel)]="product.content" placeholder="Product date"></ion-input>
   </ion-item>
 
   <button ion-button block clear (click)="addProduct(product)">Add</button>

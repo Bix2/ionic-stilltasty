@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ActionSheetController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable';
 import { ShoppingList } from '../../model/product/shoppingList.model';
@@ -24,7 +24,7 @@ export class ShoppingListPage {
   public navCtrl: NavController, 
   public navParams: NavParams, 
   public actionSheetCtrl: ActionSheetController, 
-  public product: NavParams,
+  private toastCtrl: ToastController,
   private productListService: ProductListService) {
     this.shoppingList = this.productListService.getShoppingList()
       .snapshotChanges()
@@ -38,6 +38,28 @@ export class ShoppingListPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShoppingListPage');
+  }
+
+  removeAllItems(shoppingList) {
+    // this.shoppingList is an Observable
+    shoppingList.subscribe(products => {
+      // items is an array
+      products.forEach(product => {
+          this.productListService.removeProductsFromShoppingList(product);
+      });
+      this.showToast("bottom");
+    });
+  }
+
+  showToast(position: string) {
+    const toast = this.toastCtrl.create({
+      message: 'Products removed from shopping list',
+      position: position,
+      showCloseButton: true,
+      duration: 2000
+    });
+
+    toast.present();
   }
 
 }

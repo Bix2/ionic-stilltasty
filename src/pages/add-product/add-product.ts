@@ -10,11 +10,16 @@ import { ProductListService } from '../../services/product-list.service';
 })
 export class AddProductPage {
 
+  // User product schema
   product: userProducts = {
     title: '',
     image: '',
     content: ''
   };
+  // check were the user is
+  type: string; // fridge, freezer or pantry
+  // set location of storage
+  placeToStore; // fridge, freezer or pantry
 
   constructor(
     public navCtrl: NavController,
@@ -23,13 +28,23 @@ export class AddProductPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddProductPage');
+    this.type = this.navParams.get('type');
   }
-
+  
   addProduct(product: userProducts) {
-    this.productListService.addProduct(product).then(ref => {
-      this.navCtrl.setRoot('HomePage');
-    })
+    if (this.type == "fridge") {
+      this.productListService.addFridgeProduct(product).then(ref => {
+        this.navCtrl.setRoot('HomePage');
+      });
+    } else if (this.type == "freezer") {
+      this.productListService.addFreezerProduct(product).then(ref => {
+        this.navCtrl.setRoot('HomePage');
+      });
+    } else if (this.type == "pantry") {
+      this.productListService.addPantryProduct(product).then(ref => {
+        this.navCtrl.setRoot('HomePage');
+      });
+    }
   }
 
 }

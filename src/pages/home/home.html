@@ -6,7 +6,7 @@
     </ion-title>
 
     <ion-buttons end>
-      <button navPush="AddProductPage" ion-button>
+      <button detail-push navPush="AddProductPage" [navParams]="{type:type}">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -36,8 +36,8 @@ detail-push navPush="EditProductPage"
 <ion-content padding>
   <div [ngSwitch]="type">
       <ion-list *ngSwitchCase="'fridge'">
-          <ion-item *ngFor="let product of productList | async" 
-          (click)="presentActionSheet(product.key, product.title, product.image, product.content)">
+          <ion-item *ngFor="let product of fridgeProductList | async" 
+          (click)="presentActionSheet(type, product.key, product.title, product.image, product.content)">
               <ion-card>
                 <ion-card-content>
                   <div col-10 class="item__info">
@@ -53,8 +53,8 @@ detail-push navPush="EditProductPage"
       </ion-list>
 
       <ion-list *ngSwitchCase="'freezer'">
-          <ion-item *ngFor="let product of productList | async" 
-          (click)="presentActionSheet(product.key, product.title, product.image, product.content)">
+          <ion-item *ngFor="let product of freezerProductList | async" 
+          (click)="presentActionSheet(type, product.key, product.title, product.image, product.content)">
               <ion-card>
                 <ion-card-content>
                   <div col-10 class="item__info">
@@ -70,8 +70,8 @@ detail-push navPush="EditProductPage"
       </ion-list>
   
       <ion-list *ngSwitchCase="'pantry'">
-          <ion-item *ngFor="let product of productList | async" 
-          (click)="presentActionSheet(product.key, product.title, product.image, product.content)">
+          <ion-item *ngFor="let product of pantryProductList | async" 
+          (click)="presentActionSheet(type, product.key, product.title, product.image, product.content)">
               <ion-card>
                 <ion-card-content>
                   <div col-10 class="item__info">
