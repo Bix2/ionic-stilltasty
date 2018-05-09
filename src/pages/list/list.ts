@@ -23,7 +23,7 @@ export class ListPage {
   public date: string;
   public productList: any;
   public data;
-
+  
   public pro: userProducts = {
     title: '',
     image: '',
@@ -75,11 +75,11 @@ export class ListPage {
   }
 
   addProduct(title, image, content) {
-      this.pro.title = title,
-      this.pro.image = image,
-      this.pro.content = content
-      this.productListService.addProduct(this.pro);
-      this.showToast("bottom");
+    this.pro.title = title,
+    this.pro.image = image,
+    this.pro.content = content
+    this.productListService.addProduct(this.pro);
+    this.showToast("bottom");
   }
 
   showToast(position: string) {
