@@ -13,6 +13,7 @@ import { EditProductPage } from '../pages/edit-product/edit-product';
 import { FIREBASE_CONFIG } from './firebase.credentials';
 import { ProductListService } from '../services/product-list.service';
 import { ScannerServiceProvider } from '../providers/scanner-service/scanner-service';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ScannerServiceProvider } from '../providers/scanner-service/scanner-ser
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ProductListService,
-    ScannerServiceProvider
+    ScannerServiceProvider,
+    LocalNotifications
   ]
 })
 export class AppModule { }
