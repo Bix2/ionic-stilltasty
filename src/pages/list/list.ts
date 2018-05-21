@@ -31,7 +31,11 @@ export class ListPage {
 
 
 
-  constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, private productListService: ProductListService) {
+  constructor(
+    private toastCtrl: ToastController, 
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private productListService: ProductListService) {
 
     this.productList = this.productListService.getProducts()
       .snapshotChanges()
@@ -99,4 +103,15 @@ export class ListPage {
     toast.present();
   }
 
+  removeProduct(product){
+    let index = this.listBarcodesParsed.indexOf(product);
+    if(index > -1){
+      this.listBarcodesParsed.splice(index, 1);
+    }
+  }
+
+  backToHome() {
+    this.navCtrl.setRoot('HomePage');
+  }
 }
+

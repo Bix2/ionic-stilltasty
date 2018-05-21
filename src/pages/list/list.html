@@ -46,9 +46,10 @@
                 </div>
               </ion-card-content>
             </ion-card>
-            <button ion-button block clear (click)="addProduct(d.storage, d.name, d.image, product.date)">Add</button>
+            <button ion-button block clear (click)="addProduct(d.storage, d.name, d.image, product.date); removeProduct(product)">Add</button>
         </ion-item>
       </ng-container>
     </div>
   </ion-list>
+  <button ion-button block (click)="backToHome();">Done</button>
 </ion-content>
