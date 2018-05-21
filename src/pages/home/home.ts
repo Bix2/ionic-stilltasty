@@ -82,6 +82,7 @@ export class HomePage {
             this.userListProducts.content = content;
             this.shoppingListProduct.name = title;
             this.shoppingListProduct.image = image;
+            this.productListService.addProductToWastedProductsList(this.shoppingListProduct);
             this.productListService.addProductToShoppingList(this.shoppingListProduct);
             // check location and remove item
             if (type == "fridge") {
@@ -100,6 +101,7 @@ export class HomePage {
             this.userListProducts.content = content;
             this.shoppingListProduct.name = title;
             this.shoppingListProduct.image = image;
+            this.productListService.addProductToEatenProductsList(this.shoppingListProduct);
             this.productListService.addProductToShoppingList(this.shoppingListProduct);
             // check location and remove item
             if (type == "fridge") {

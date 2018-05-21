@@ -3,6 +3,8 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { userProducts } from '../model/product/userProducts.model';
 import { Products } from '../model/product/products.model';
 import { ShoppingList } from '../model/product/shoppingList.model';
+import { EatenProductsList } from '../model/product/eatenProducts.model';
+import { WastedProductsList } from '../model/product/wastedProducts.model';
 
 @Injectable()
 export class ProductListService {
@@ -12,6 +14,8 @@ export class ProductListService {
     private pantryListRef = this.db.list<userProducts>('pantry');
     private productRef = this.db.list<Products>('products');
     private shoppingListRef = this.db.list<ShoppingList>('shopping-list');
+    private eatenProductsRef = this.db.list<EatenProductsList>('eaten-products-list');
+    private wastedProductsRef = this.db.list<WastedProductsList>('wasted-products-list');
 
     constructor(private db: AngularFireDatabase) { }
 
@@ -83,6 +87,16 @@ export class ProductListService {
 
     removeProductsFromShoppingList(product: ShoppingList) {
         return this.shoppingListRef.remove(product.key);
+    }
+
+    // Wasted products list functions 
+    addProductToEatenProductsList(product: EatenProductsList) {
+        return this.eatenProductsRef.push(product);
+    }
+
+    // Eaten products list functions 
+    addProductToWastedProductsList(product: WastedProductsList) {
+        return this.wastedProductsRef.push(product);
     }
 
 }

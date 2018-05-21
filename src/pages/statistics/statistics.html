@@ -7,12 +7,63 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>statistics</ion-title>
+    <ion-title>Statistics</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-grid>
+    <h6>My food waste percentage</h6>
+    <ion-row>
+      <ion-col col-12>
+        <canvas #doughnutCanvas></canvas>
+      </ion-col>
+    </ion-row>
+
+    <h6>The impact of my effort</h6>
+    <ion-row>
+      <ion-col col-6>
+        <p>Food items eaten</p>
+        <p>Food items wasted</p>
+        <p>Estimated savings</p>
+      </ion-col>
+      <ion-col col-6 style="text-align: right">
+        <p>{{eatenProducts}}</p>
+        <p>{{wastedProducts}}</p>
+        <p>€{{priceOfWastedProducts}}</p>
+      </ion-col>
+    </ion-row>
+
+    <h6>The impact of my effort</h6>
+    <ion-row class="footprint-status-examples">
+      <ion-col col-12 style="text-align: center">
+        <img class="footprint-status" src="{{footprintTree}}" alt="footprint status">
+        <p class="footprint-status-percentage">{{footprintIpactStatus}}%</p>
+        <p>of all your food</p>
+        <p>items are eaten</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3 style="text-align: center">
+        <img src="../../assets/imgs/tree-very-bad.svg" alt="footprint status">
+        <p>0-60%</p>
+      </ion-col>
+      <ion-col col-3 style="text-align: center">
+        <img src="../../assets/imgs/tree-bad.svg" alt="footprint status">
+        <p>> 60%</p>
+      </ion-col>
+      <ion-col col-3 style="text-align: center">
+        <img src="../../assets/imgs/tree-good.svg" alt="footprint status">
+        <p>> 75%</p>
+      </ion-col>
+      <ion-col col-3 style="text-align: center">
+        <img src="../../assets/imgs/tree-perfect.svg" alt="footprint status">
+        <p>> 90%</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

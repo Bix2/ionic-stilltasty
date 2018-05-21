@@ -1,3 +1,23 @@
 page-statistics {
+    h6 {
+        text-align: center;
+        margin: 2em 0 1em;
+    }
 
+    .footprint-status {
+        max-width: 50%;
+    }
+
+    .footprint-status-examples p {
+        margin: 0;
+    }
+    .footprint-status-examples p:last-child {
+        padding-bottom: 1em;
+    }
+
+    .footprint-status-percentage {
+        padding: 1em 0 5px;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
 }

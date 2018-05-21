@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { FirebaseApp } from "angularfire2";
+import { Inject } from "@angular/core";
+
+import { Chart } from 'chart.js';
 
 /**
  * Generated class for the StatisticsPage page.
@@ -15,11 +20,74 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class StatisticsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  @ViewChild('doughnutCanvas') doughnutCanvas;
+
+  doughnutChart: any;
+  eatenProducts: any;
+  wastedProducts: any;
+  priceOfWastedProducts: number;
+  footprintIpactStatus: any;
+  footprintTree: String;
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    @Inject(FirebaseApp) public fb: any) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad StatisticsPage');
+    
+    var eaten;
+    var wasted;
+    const ref = this.fb.database().ref();
+    ref.child('/eaten-products-list').once('value').then(
+      (snapshot) => {
+        eaten = snapshot.numChildren(); // gets eaten list length
+        this.eatenProducts = eaten;
+      });
+          
+    ref.child('/wasted-products-list').once('value').then(
+      (snapshot) => {
+        wasted = snapshot.numChildren(); // gets wasted list length
+        this.wastedProducts = wasted;
+        this.priceOfWastedProducts = eaten - wasted * 1,35;
+        this.footprintIpactStatus = (100*eaten) / (eaten+wasted);
+        this.footprintIpactStatus = this.footprintIpactStatus.toFixed(2);
+        if(this.footprintIpactStatus > 90) {
+          this.footprintTree = "../../assets/imgs/tree-perfect.svg";
+        } else if(this.footprintIpactStatus > 75) {
+          this.footprintTree = "../../assets/imgs/tree-good.svg";
+        } else if(this.footprintIpactStatus > 60) {
+          this.footprintTree = "../../assets/imgs/tree-bad.svg";
+        } else {
+          this.footprintTree = "../../assets/imgs/tree-very-bad.svg";
+        }
+
+        this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+          
+          type: 'doughnut',
+          data: {
+              labels: ["Eaten", "Wasted"],
+              datasets: [{
+                  label: '# of Votes',
+                  data: [eaten, wasted],
+                  backgroundColor: [
+                      'rgba(25, 240, 166, 1)',
+                      '#d2d2d2'
+                  ],
+                  hoverBackgroundColor: [
+                      "#19F0A6",
+                      "#d2d2d2"
+                  ],
+                  borderWidth: [
+                    10,
+                    10
+                  ]
+              }]
+          }
+        });
+      }
+    );
   }
 
 }
