@@ -27,11 +27,11 @@
           </div>
           <div col-2 class="item__checkbox">
             <ion-item>
-              <ion-checkbox color="danger"></ion-checkbox>
+              <ion-checkbox (click)="addToList(product)" color="danger"></ion-checkbox>
             </ion-item>
           </div>
         </ion-item>
       </ng-container>
     </ion-list>
-    <button full ion-button (click)="removeAllItems(shoppingList)">Remove all</button>
+    <button full ion-button (click)="removeCheckedProducts()">Remove selected items</button>
 </ion-content>

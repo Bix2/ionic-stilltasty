@@ -19,6 +19,7 @@ import { ProductListService } from '../../services/product-list.service';
 export class ShoppingListPage {
 
   shoppingList: Observable<ShoppingList[]>;
+  checkedList = Array();
 
   constructor(
   public navCtrl: NavController, 
@@ -40,15 +41,14 @@ export class ShoppingListPage {
     console.log('ionViewDidLoad ShoppingListPage');
   }
 
-  removeAllItems(shoppingList) {
-    // this.shoppingList is an Observable
-    shoppingList.subscribe(products => {
-      // items is an array
-      products.forEach(product => {
-          this.productListService.removeProductsFromShoppingList(product);
-      });
-      this.showToast("bottom");
-    });
+  addToList(product) {
+    this.checkedList.push(product);
+  }
+
+  removeCheckedProducts() {
+    for (let i = 0; i < this.checkedList.length; i++) {
+      this.productListService.removeProductsFromShoppingList(this.checkedList[i]);
+    }
   }
 
   showToast(position: string) {
