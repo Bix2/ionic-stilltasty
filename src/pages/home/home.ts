@@ -145,9 +145,7 @@ export class HomePage {
         {
           text: 'Scan',
           handler: () => {
-            this.navCtrl.push(ScanProductPage, {
-              type: type
-            });
+            this.startScan();
           }
         },{
           text: 'Manually',
@@ -166,6 +164,10 @@ export class HomePage {
       ]
     });
     actionSheet.present();
+  }
+
+  startScan() {
+    this.navCtrl.push(ScanProductPage);
   }
   
 }

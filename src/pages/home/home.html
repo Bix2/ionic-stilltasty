@@ -125,7 +125,7 @@ detail-push navPush="EditProductPage"
         </button>
 
         <ion-fab-list side="top">
-          <button ion-fab navPush="ScanProductPage">
+          <button ion-fab (click)="startScan()">
             <ion-icon name="qr-scanner"></ion-icon>
           </button>
         </ion-fab-list>
