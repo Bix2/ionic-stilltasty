@@ -76,7 +76,7 @@ export class HomePage {
       title: 'Choose food item options',
       buttons: [
         {
-          text: 'I wasted it',
+          text: 'Expired',
           role: 'destructive',
           handler: () => {
             this.userListProducts.key = key;
@@ -96,7 +96,7 @@ export class HomePage {
             }
           }
         },{
-          text: 'I ate it',
+          text: 'Eaten',
           handler: () => {
             this.userListProducts.key = key;
             this.userListProducts.title = title;
@@ -115,7 +115,7 @@ export class HomePage {
             }
           }
         },{
-          text: 'Edit it',
+          text: 'Edit',
           handler: () => {
             this.userListProducts.key = key;
             this.userListProducts.title = title;
