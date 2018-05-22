@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Observable';
 import { userProducts } from '../../model/product/userProducts.model';
 import { ProductListService } from '../../services/product-list.service';
 import { EditProductPage } from '../edit-product/edit-product';
+import { ScanProductPage } from '../scan-product/scan-product';
+import { AddProductPage } from '../add-product/add-product';
 import { ShoppingList } from '../../model/product/shoppingList.model';
 
 
@@ -71,7 +73,7 @@ export class HomePage {
 
   presentActionSheet(type, key, title, image, content) {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'What have you just done to that delicious food?',
+      title: 'Choose food item options',
       buttons: [
         {
           text: 'I wasted it',
@@ -121,6 +123,36 @@ export class HomePage {
             this.userListProducts.content = content;
             this.navCtrl.push(EditProductPage, {
               product: this.userListProducts,
+              type: type
+            });
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  presentActionSheetAddProduct(type) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Choose adding option',
+      buttons: [
+        {
+          text: 'Scan',
+          handler: () => {
+            this.navCtrl.push(ScanProductPage, {
+              type: type
+            });
+          }
+        },{
+          text: 'Manually',
+          handler: () => {
+            this.navCtrl.push(AddProductPage, {
               type: type
             });
           }

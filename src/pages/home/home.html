@@ -4,12 +4,6 @@
     <ion-title>
       StillTasty
     </ion-title>
-
-    <ion-buttons end>
-      <button detail-push navPush="AddProductPage" [navParams]="{type:type}">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
   <!-- end navbar -->
 
@@ -36,9 +30,21 @@ detail-push navPush="EditProductPage"
 <ion-content padding>
   <div [ngSwitch]="type">
       <ion-list *ngSwitchCase="'fridge'">
-          <ion-item *ngFor="let product of fridgeProductList | async" 
+          <ion-item no-lines (click)="presentActionSheetAddProduct(type)">
+              <ion-card class="add-btn-card">
+                <ion-card-content>
+                  <div style="text-align: center">
+                    <button>
+                      <ion-icon class="add-btn" name="add-circle"></ion-icon>
+                    </button>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+          </ion-item>
+          <ion-item no-lines *ngFor="let product of fridgeProductList | async" 
           (click)="presentActionSheet(type, product.key, product.title, product.image, product.content)">
-              <ion-card>
+              <ion-card style="position: relative">
+                <div class="expiration-progress"></div>
                 <ion-card-content>
                   <div col-10 class="item__info">
                     <p class="item__info__name">{{product.title}}</p> 
@@ -53,9 +59,20 @@ detail-push navPush="EditProductPage"
       </ion-list>
 
       <ion-list *ngSwitchCase="'freezer'">
-          <ion-item *ngFor="let product of freezerProductList | async" 
+          <ion-item no-lines (click)="presentActionSheetAddProduct(type)">
+              <ion-card class="add-btn-card">
+                <ion-card-content>
+                  <div style="text-align: center">
+                    <button>
+                      <ion-icon class="add-btn" name="add-circle"></ion-icon>
+                    </button>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+          </ion-item>
+          <ion-item no-lines *ngFor="let product of freezerProductList | async" 
           (click)="presentActionSheet(type, product.key, product.title, product.image, product.content)">
-              <ion-card>
+              <ion-card style="position: relative;">
                 <ion-card-content>
                   <div col-10 class="item__info">
                     <p class="item__info__name">{{product.title}}</p> 
@@ -70,9 +87,21 @@ detail-push navPush="EditProductPage"
       </ion-list>
   
       <ion-list *ngSwitchCase="'pantry'">
-          <ion-item *ngFor="let product of pantryProductList | async" 
+          <ion-item no-lines (click)="presentActionSheetAddProduct(type)">
+              <ion-card class="add-btn-card">
+                <ion-card-content>
+                  <div style="text-align: center">
+                    <button>
+                      <ion-icon class="add-btn" name="add-circle"></ion-icon>
+                    </button>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+          </ion-item>
+          <ion-item no-lines *ngFor="let product of pantryProductList | async" 
           (click)="presentActionSheet(type, product.key, product.title, product.image, product.content)">
-              <ion-card>
+              <ion-card style="position: relative;">
+                <!-- <div class="expiration-progress"></div> -->
                 <ion-card-content>
                   <div col-10 class="item__info">
                     <p class="item__info__name">{{product.title}}</p> 

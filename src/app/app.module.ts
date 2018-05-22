@@ -9,6 +9,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { MyApp } from './app.component';
 import { ListPage } from '../pages/list/list';
 import { EditProductPage } from '../pages/edit-product/edit-product';
+import { AddProductPage } from '../pages/add-product/add-product';
+import { ScanProductPage } from '../pages/scan-product/scan-product';
 
 import { FIREBASE_CONFIG } from './firebase.credentials';
 import { ProductListService } from '../services/product-list.service';
@@ -20,7 +22,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
   declarations: [
     MyApp,
     ListPage,
-    EditProductPage
+    EditProductPage,
+    AddProductPage,
+    ScanProductPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
   entryComponents: [
     MyApp,
     ListPage,
-    EditProductPage
+    EditProductPage,
+    AddProductPage,
+    ScanProductPage
   ],
   providers: [
     StatusBar,

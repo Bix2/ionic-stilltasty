@@ -53,14 +53,14 @@ export class StatisticsPage {
         this.priceOfWastedProducts = eaten - wasted * 1,35;
         this.footprintIpactStatus = (100*eaten) / (eaten+wasted);
         this.footprintIpactStatus = this.footprintIpactStatus.toFixed(2);
-        if(this.footprintIpactStatus > 90) {
-          this.footprintTree = "../../assets/imgs/tree-perfect.svg";
-        } else if(this.footprintIpactStatus > 75) {
-          this.footprintTree = "../../assets/imgs/tree-good.svg";
-        } else if(this.footprintIpactStatus > 60) {
-          this.footprintTree = "../../assets/imgs/tree-bad.svg";
+        if(this.footprintIpactStatus >= 90) {
+          this.footprintTree = "https://svgshare.com/i/6kE.svg";
+        } else if(this.footprintIpactStatus >= 75) {
+          this.footprintTree = "https://svgshare.com/i/6m1.svg";
+        } else if(this.footprintIpactStatus >= 60) {
+          this.footprintTree = "https://svgshare.com/i/6kr.svg";
         } else {
-          this.footprintTree = "../../assets/imgs/tree-very-bad.svg";
+          this.footprintTree = "https://svgshare.com/i/6m2.svg";
         }
 
         this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {

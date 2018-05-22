@@ -14,4 +14,22 @@ page-home {
     .item__info__name {
         font-weight: bold;
     }
+
+    .expiration-progress {
+        background-color: #19f0a6;
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 10px 5px 70px 5px;
+    }
+
+    .add-btn-card {
+        background-color: #f7f7f7;
+    }
+
+    .add-btn {
+        font-size: 3em;
+        color: #cacaca;
+    }
+
 }
