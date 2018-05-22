@@ -44,7 +44,6 @@ detail-push navPush="EditProductPage"
           <ion-item no-lines *ngFor="let product of fridgeProductList | async" 
           (click)="presentActionSheet(type, product.key, product.title, product.image, product.content)">
               <ion-card style="position: relative">
-                <div class="expiration-progress"></div>
                 <ion-card-content>
                   <div col-10 class="item__info">
                     <p class="item__info__name">{{product.title}}</p> 
