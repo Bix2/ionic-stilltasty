@@ -10,12 +10,12 @@
 
   <ion-item>
     <ion-label>Title</ion-label>
-    <ion-input [(ngModel)]="product.title" placeholder="Java Sample Approach"></ion-input>
+    <ion-input [(ngModel)]="product.title" placeholder="{{product.title}}"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label>Content</ion-label>
-    <ion-input [(ngModel)]="product.content" placeholder="Java Technology - Spring Framework"></ion-input>
+    <ion-datetime displayFormat="DD/MM/YYYY" max="2025" pickerFormat="DD/MM/YYYY" [(ngModel)]="product.content" placeholder="{{product.content}}"></ion-datetime>
   </ion-item>
 
   <button ion-button block clear (click)="updateProduct(product)">Save</button>

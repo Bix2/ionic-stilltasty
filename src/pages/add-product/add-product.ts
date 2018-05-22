@@ -13,7 +13,7 @@ export class AddProductPage {
   // User product schema
   product: userProducts = {
     title: '',
-    image: '',
+    image: 'https://svgshare.com/i/6mt.svg',
     content: ''
   };
   // check were the user is
@@ -32,15 +32,30 @@ export class AddProductPage {
   }
   
   addProduct(product: userProducts) {
+    var year;
+    var month;
+    var day;
     if (this.type == "fridge") {
+      year = product.content.substr(2, 2);
+      month = product.content.substr(5, 2);
+      day = product.content.substr(8, 2);
+      product.content = day + "-" + month + "-" + year;
       this.productListService.addFridgeProduct(product).then(ref => {
         this.navCtrl.setRoot('HomePage');
       });
     } else if (this.type == "freezer") {
+      year = product.content.substr(2, 2);
+      month = product.content.substr(5, 2);
+      day = product.content.substr(8, 2);
+      product.content = day + "-" + month + "-" + year;
       this.productListService.addFreezerProduct(product).then(ref => {
         this.navCtrl.setRoot('HomePage');
       });
     } else if (this.type == "pantry") {
+      year = product.content.substr(2, 2);
+      month = product.content.substr(5, 2);
+      day = product.content.substr(8, 2);
+      product.content = day + "-" + month + "-" + year;
       this.productListService.addPantryProduct(product).then(ref => {
         this.navCtrl.setRoot('HomePage');
       });

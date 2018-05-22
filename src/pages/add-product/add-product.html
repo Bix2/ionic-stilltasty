@@ -21,7 +21,7 @@
 
   <ion-item>
     <ion-label>Date</ion-label>
-    <ion-input [(ngModel)]="product.content" placeholder="Product date"></ion-input>
+    <ion-datetime displayFormat="DD/MM/YYYY" max="2025" pickerFormat="DD/MM/YYYY" [(ngModel)]="product.content" placeholder="Product date"></ion-datetime>
   </ion-item>
 
   <button ion-button block clear (click)="addProduct(product)">Add</button>
