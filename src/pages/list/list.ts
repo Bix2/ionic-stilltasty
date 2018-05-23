@@ -122,6 +122,9 @@ export class ListPage {
     let index = this.listBarcodesParsed.indexOf(product);
     if(index > -1){
       this.listBarcodesParsed.splice(index, 1);
+      if (this.listBarcodesParsed.length == 0) {
+        document.getElementById("btn-done").style.display = "block";
+      }
     }
   }
 
