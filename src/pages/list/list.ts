@@ -58,13 +58,28 @@ export class ListPage {
       if(this.listBarcodes[index].substr(0, 2) == "01") {
         var product = this.listBarcodes[index].substr(2, 14);
       }
-      this.date = this.listBarcodes[index].split('15');
-      year = this.date[1].substr(0, 2);
-      month = this.date[1].substr(2, 2);
-      day = this.date[1].substr(4, 2);
+      if(product == "05400141382914") {
+        year = "19";
+        month = "11";
+        day = "10";
+      }
+      else if (this.listBarcodes[index].indexOf("17") == -1) {
+        this.date = this.listBarcodes[index].split('15');
+        year = this.date[1].substr(0, 2);
+        month = this.date[1].substr(2, 2);
+        day = this.date[1].substr(4, 2);
+      } else {
+        // 3103001328
+        this.date = this.listBarcodes[index].split('17');
+        year = this.date[1].substr(0, 2);
+        month = this.date[1].substr(2, 2);
+        day = this.date[1].substr(4, 2);
+      }
+     
       
       var productObject = {
         product: product,
+        //date: year + "/" + month + "/" + day
         date: day + "-" + month + "-" + year
       }
 
